@@ -1,0 +1,1 @@
+from src.data.datamodule import normalize_data
