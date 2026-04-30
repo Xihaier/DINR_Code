@@ -1,0 +1,14 @@
+_target_: src.data.datamodule.DataModule
+data_dir: ${paths.data_dir}turbulence_1024.npy
+in_features: 2
+normalization: min-max
+temporal: False
+data_shape: [1024, 1024]
+batch_size: [65536, 65536, 65536]
+shuffle: [True, False, False]
+num_workers: [16, 4, 4]
+pin_memory: [True, True, True]
+ntk_subset_mode: subgrid
+ntk_subgrid_g: 32
+generalization_test: false
+generalization_train_percentage: 0.75

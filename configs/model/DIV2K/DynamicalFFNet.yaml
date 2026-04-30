@@ -1,0 +1,47 @@
+_target_: src.models.modelmodule.DINRTraining
+
+optimizer:
+  _target_: torch.optim.AdamW
+  _partial_: true
+  lr: 1e-3
+  weight_decay: 1e-5
+
+scheduler:
+  _target_: torch.optim.lr_scheduler.ReduceLROnPlateau
+  _partial_: true
+  mode: min
+  factor: 0.1
+  patience: 10
+
+criterion:
+  _target_: torch.nn.MSELoss
+
+net:
+  _target_: src.models.components.Dynamical_FFNet.DynamicalFourierFeatureNetwork
+  input_dim: 2
+  mapping_size: 256
+  hidden_dim: 256
+  output_dim: 3
+  num_layers: 3
+  dropout_rate: 0.1
+  activation: "GELU"
+  block_type: "residual"
+  num_steps: 12
+  total_time: 1.0
+  ot_lambda: 0.001
+  sigma: 20.0
+  final_activation: null
+
+compile: false
+
+ntk_analysis: false
+ntk_frequency: 2
+ntk_top_k: 10
+ntk_normalize: "trace"
+
+checkpoint_epochs: []
+
+ablation_ot_loss: false
+ablation_noise: false
+noise_type: "gaussian"
+noise_level: 0.01

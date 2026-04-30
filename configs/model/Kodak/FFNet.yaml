@@ -1,0 +1,43 @@
+_target_: src.models.modelmodule.INRTraining
+
+optimizer:
+  _target_: torch.optim.AdamW
+  _partial_: true
+  lr: 1e-3
+  weight_decay: 1e-5
+
+scheduler:
+  _target_: torch.optim.lr_scheduler.ReduceLROnPlateau
+  _partial_: true
+  mode: min
+  factor: 0.1
+  patience: 10
+
+criterion:
+  _target_: torch.nn.MSELoss
+ 
+net:
+  _target_: src.models.components.FFNet.FourierFeatureNetwork
+  input_dim: 2
+  mapping_size: 256
+  hidden_dim: 256
+  num_layers: 5
+  output_dim: 3
+  sigma: 10.0
+  dropout_rate: 0.1
+  activation: "GELU"
+  final_activation: null
+  use_residual: true
+
+compile: false
+
+ntk_analysis: false
+ntk_frequency: 2
+ntk_top_k: 10
+ntk_normalize: "trace"
+
+checkpoint_epochs: []
+
+ablation_noise: false
+noise_type: "gaussian"
+noise_level: 0.01

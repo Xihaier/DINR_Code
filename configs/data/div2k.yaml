@@ -1,0 +1,13 @@
+_target_: src.data.datamodule.ImageDataModule
+data_dir: ${paths.data_dir}div2k/
+image_name: "02.png"
+in_features: 2
+zero_mean: false
+batch_size: [65536, 65536, 65536]
+shuffle: [True, False, False]
+num_workers: [16, 4, 4]
+pin_memory: [True, True, True]
+ntk_subset_mode: subgrid
+ntk_subgrid_g: 32
+generalization_test: false
+generalization_train_percentage: 0.75
